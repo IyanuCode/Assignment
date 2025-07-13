@@ -60,11 +60,12 @@ namespace TaskScheduller
 
 
             //4th Assignment
-            IShape circle = new Circle();
-            circle.CalculateArea(5, 0);
+            IShape circle = new Circle { Radius = 5 };
+            Console.WriteLine($"Circle Area: {circle.CalculateArea()}");
 
-            IShape rectangle = new Rectangle();
-            rectangle.CalculateArea(8, 4);
+            IShape rectangle = new Rectangle { Width = 4, Height = 6 };
+            Console.WriteLine($"Rectangle Area: {rectangle.CalculateArea()}");
+
 
         }
     }
@@ -112,11 +113,11 @@ namespace TaskScheduller
 
     public class TemperatureSensor
     {
-        private int temperature;
+        private double temperature;
 
         public void Set(int input)
         {
-            if (input <= 150 && input >= 50)
+            if (input  input >= -50 && <= 150 )
             {
                 temperature = input;
             }
@@ -136,28 +137,20 @@ namespace TaskScheduller
     */
     public interface IShape
     {
-        void CalculateArea(double input, double input2);
+        double CalculateArea();
     }
     public class Circle : IShape
     {
-        public void CalculateArea(double input, double input2)
-        {
-            double radius = Convert.ToDouble(input);
-            double area = Math.PI * radius * radius;
-            Console.WriteLine($"The area of the circle is: {area:F2}");
-        }
+        public double Radius { get; set; }
+        public double CalculateArea() => Math.PI * Radius * Radius;
+
     }
 
     public class Rectangle : IShape
     {
-        public void CalculateArea(double input, double widthInput)
-        {
-            double length = Convert.ToDouble(input);
-            double width = Convert.ToDouble(widthInput);
-            double area = length * width;
-            Console.WriteLine($"The area of the rectangle is: {area:F2}");
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public double CalculateArea() => Width * Height;
 
-
-        }
     }
 }
